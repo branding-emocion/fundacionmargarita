@@ -1,103 +1,309 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
+import {
+  Heart,
+  Users,
+  Award,
+  Handshake,
+  ArrowRight,
+  Smile,
+} from "lucide-react";
+
+export default function HomePage() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 },
+  };
+
+  const staggerContainer = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-primary/10 to-accent/10 py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h1 className="text-4xl md:text-6xl font-black text-primary mb-6">
+                Donde nace tu <span className="text-accent">felicidad</span>
+              </h1>
+              <p className="text-lg text-muted-foreground mb-8 max-w-lg">
+                Devolvemos sonrisas a niños con labio fisurado y paladar
+                hendido. Más de 11,000 cirugías realizadas con amor y
+                dedicación.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  asChild
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  <Link href="/Donar">
+                    <Heart className="w-5 h-5 mr-2" />
+                    Donar Ahora
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/nosotros">
+                    Conoce Nuestra Historia
+                    <ArrowRight className="w-5 h-5 ml-2" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img
+                  src="/niño.jpg"
+                  alt="Niño sonriendo después de cirugía"
+                  className="w-full max-h-[700px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+              </div>
+              {/* Floating emoji */}
+              <motion.div
+                className="absolute -top-4 -right-4 text-6xl"
+                animate={{
+                  rotate: [0, 10, -10, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "reverse",
+                }}
+              >
+                😊
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Quick Stats */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4">
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+          >
+            {[
+              { number: "11,000+", label: "Cirugías Realizadas", icon: Smile },
+              { number: "9", label: "Años de Experiencia", icon: Award },
+              { number: "100+", label: "Voluntarios Médicos", icon: Users },
+              {
+                number: "15+",
+                label: "Alianzas Estratégicas",
+                icon: Handshake,
+              },
+            ].map((stat, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                  <CardContent className="p-0">
+                    <stat.icon className="w-12 h-12 text-primary mx-auto mb-4" />
+                    <h3 className="text-3xl font-bold text-primary mb-2">
+                      {stat.number}
+                    </h3>
+                    <p className="text-muted-foreground">{stat.label}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Preview */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <img
+                src="/placeholder.svg?height=400&width=500"
+                alt="Dr. Walter Zegarra Carranza"
+                className="rounded-2xl shadow-lg w-full"
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold text-primary mb-6">
+                Conoce Nuestra Historia
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Fundada en 2015 por el Dr. Walter Zegarra Carranza, conocido
+                como el "Apóstol de la Sonrisa", nuestra fundación nació del
+                amor y dedicación hacia los niños con labio fisurado y paladar
+                hendido.
+              </p>
+              <p className="text-muted-foreground mb-8">
+                Nombrada en honor a su querida madre Margarita, quien le inculcó
+                el ejemplo de solidaridad y servicio a los más necesitados.
+              </p>
+              <Button asChild>
+                <Link href="/nosotros">
+                  Leer Historia Completa
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stories Preview */}
+      <section className="py-16 bg-card">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold text-primary mb-4">
+              Historias que Inspiran
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Cada sonrisa cuenta una historia de esperanza, transformación y
+              nuevas oportunidades.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              {
+                name: "María, 8 años",
+                story:
+                  "Después de su cirugía, María puede sonreír con confianza y ha mejorado su autoestima significativamente.",
+                image: "young girl smiling confidently after cleft lip surgery",
+              },
+              {
+                name: "Carlos, 12 años",
+                story:
+                  "La cirugía de paladar hendido le permitió a Carlos hablar claramente por primera vez en su vida.",
+                image: "boy speaking clearly after cleft palate surgery",
+              },
+              {
+                name: "Ana, 6 años",
+                story:
+                  "Con su nueva sonrisa, Ana ahora participa activamente en actividades escolares y sociales.",
+                image:
+                  "little girl participating in school activities, happy and confident",
+              },
+            ].map((story, index) => (
+              <motion.div key={index} variants={fadeInUp}>
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+                  <div className="aspect-square overflow-hidden">
+                    <img
+                      src={`/placeholder.svg?height=300&width=300&query=${story.image}`}
+                      alt={story.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-semibold text-primary mb-2">
+                      {story.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      {story.story}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center mt-12"
+          >
+            <Button asChild variant="outline">
+              <Link href="/historias">
+                Ver Todas las Historias
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-primary to-accent text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold mb-4">Únete a Nuestra Misión</h2>
+            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+              Tu donación puede cambiar la vida de un niño. Ayúdanos a seguir
+              devolviendo sonrisas y creando historias de esperanza.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button size="lg" variant="secondary" asChild>
+                <Link href="/Donar">
+                  <Heart className="w-5 h-5 mr-2" />
+                  Hacer Donación
+                </Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
+                asChild
+              >
+                <Link href="/contacto">Ser Voluntario</Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
