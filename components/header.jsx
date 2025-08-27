@@ -29,7 +29,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <Image src={"/logo.jpg"} alt="Logo" width={160} height={65} />
+            <Image src={"/logo.jpg"} alt="Logo" width={160} height={52} />
           </Link>
 
           {/* Desktop Navigation */}
