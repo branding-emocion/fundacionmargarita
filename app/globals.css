@@ -3,113 +3,118 @@
 
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  /* Updated to vibrant, joyful colors that truly convey happiness and hope */
+  --background: #ffffff; /* Pure white for clean, fresh feel */
+  --foreground: #1a202c; /* Dark gray for readability */
+  --card: #f7fafc; /* Very light gray for cards */
+  --card-foreground: #2d3748; /* Dark gray for card text */
+  --popover: #ffffff; /* White for popovers */
+  --popover-foreground: #1a202c; /* Dark gray for popover text */
+  --primary: #01b4f4; /* Vibrant emerald green - healing and growth */
+  --primary-foreground: #ffffff; /* White text on primary */
+  --secondary: #34d399; /* Brighter mint green for secondary actions */
+  --secondary-foreground: #ffffff; /* White text on secondary */
+  --muted: #f1f5f9; /* Light muted background */
+  --muted-foreground: #64748b; /* Muted text color */
+  --accent: #ed0183; /* Warm golden yellow accent for joy */
+  --accent-foreground: #ffffff; /* White text on accent */
+  --destructive: #ef4444; /* Red for alerts */
+  --destructive-foreground: #ffffff; /* White text on destructive */
+  --border: #e2e8f0; /* Light border color */
+  --input: #ffffff; /* White input background */
+  --ring: #10b981; /* Emerald focus ring */
+  --chart-1: #10b981; /* Vibrant emerald for charts */
+  --chart-2: #f59e0b; /* Golden yellow for secondary chart */
+  --chart-3: #f97316; /* Orange for tertiary chart */
+  --chart-4: #eab308; /* Bright yellow for quaternary chart */
+  --chart-5: #ec4899; /* Pink for positive indicators */
+  --radius: 0.5rem; /* Friendly rounded corners */
+  --sidebar: #f8fafc; /* Light sidebar background */
+  --sidebar-foreground: #334155; /* Dark sidebar text */
+  --sidebar-primary: #10b981; /* Emerald sidebar primary */
+  --sidebar-primary-foreground: #ffffff; /* White sidebar primary text */
+  --sidebar-accent: #f59e0b; /* Golden sidebar accent */
+  --sidebar-accent-foreground: #ffffff; /* White sidebar accent text */
+  --sidebar-border: #e2e8f0; /* Light sidebar border */
+  --sidebar-ring: #10b981; /* Emerald sidebar focus ring */
+}
+
+.dark {
+  /* Updated dark mode colors to maintain warmth and vibrancy */
+  --background: #0f172a; /* Dark background */
+  --foreground: #f1f5f9; /* Light text */
+  --card: #1e293b; /* Dark cards */
+  --card-foreground: #f1f5f9; /* Light card text */
+  --popover: #1e293b; /* Dark popover background */
+  --popover-foreground: #f1f5f9; /* Light popover text */
+  --primary: #34d399; /* Brighter emerald in dark mode */
+  --primary-foreground: #0f172a; /* Dark text on primary */
+  --secondary: #475569; /* Dark secondary background */
+  --secondary-foreground: #f1f5f9; /* Light secondary text */
+  --muted: #334155; /* Dark muted background */
+  --muted-foreground: #94a3b8; /* Muted text in dark mode */
+  --accent: #fbbf24; /* Bright golden accent */
+  --accent-foreground: #0f172a; /* Dark text on accent */
+  --destructive: #f87171; /* Softer red in dark mode */
+  --destructive-foreground: #f1f5f9; /* Light text on destructive */
+  --border: #334155; /* Dark border */
+  --input: #334155; /* Dark input background */
+  --ring: #34d399; /* Bright emerald focus ring */
+  --chart-1: #34d399; /* Bright emerald for charts */
+  --chart-2: #fbbf24; /* Golden yellow for secondary chart */
+  --chart-3: #fb923c; /* Orange for tertiary chart */
+  --chart-4: #facc15; /* Bright yellow for quaternary chart */
+  --chart-5: #f472b6; /* Pink for positive indicators */
+  --sidebar: #0f172a; /* Dark sidebar background */
+  --sidebar-foreground: #f1f5f9; /* Light sidebar text */
+  --sidebar-primary: #34d399; /* Bright emerald sidebar primary */
+  --sidebar-primary-foreground: #0f172a; /* Dark sidebar primary text */
+  --sidebar-accent: #334155; /* Dark sidebar accent */
+  --sidebar-accent-foreground: #f1f5f9; /* Light sidebar accent text */
+  --sidebar-border: #334155; /* Dark sidebar border */
+  --sidebar-ring: #34d399; /* Bright emerald sidebar focus ring */
+}
+
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-}
-
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {

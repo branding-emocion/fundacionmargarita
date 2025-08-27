@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,17 +29,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <Heart className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-primary">
-                Fundación Margarita
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                Devolviendo Sonrisas
-              </p>
-            </div>
+            <Image src={"/logo.jpg"} alt="Logo" width={160} height={65} />
           </Link>
 
           {/* Desktop Navigation */}

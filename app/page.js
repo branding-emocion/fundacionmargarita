@@ -60,7 +60,7 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="/nosotros">
+                  <Link href="/Nosotros">
                     Conoce Nuestra Historia
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Link>
@@ -149,7 +149,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
             >
               <img
-                src="/placeholder.svg?height=400&width=500"
+                src="/Nosotros.jpg"
                 alt="Dr. Walter Zegarra Carranza"
                 className="rounded-2xl shadow-lg w-full"
               />
@@ -236,7 +236,7 @@ export default function HomePage() {
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square overflow-hidden">
                     <img
-                      src={`/placeholder.svg?height=300&width=300&query=${story.image}`}
+                      src={`/Nosotros.jpg`}
                       alt={story.name}
                       className="w-full h-full object-cover"
                     />
@@ -262,7 +262,7 @@ export default function HomePage() {
             className="text-center mt-12"
           >
             <Button asChild variant="outline">
-              <Link href="/historias">
+              <Link href="/Historias">
                 Ver Todas las Historias
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
@@ -298,7 +298,7 @@ export default function HomePage() {
                 className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
                 asChild
               >
-                <Link href="/contacto">Ser Voluntario</Link>
+                <Link href="/Contacto">Ser Voluntario</Link>
               </Button>
             </div>
           </motion.div>
