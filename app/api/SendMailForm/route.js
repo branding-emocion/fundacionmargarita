@@ -28,9 +28,9 @@ export async function POST(request) {
       .join(""); // Join para unir todas las filas en un solo string
 
   const mailOptions = {
-    from: '"Reclamos" <notificacion@brandingemocion.net>',
+    from: '"Formulario de Contacto" <notificacion@brandingemocion.net>',
     to: `administracion@fundacionmargarita.com,fundamarg.trujillo@gmail.com,dweb@brandingemocion.com`, // Enviar a la empresa y al cliente
-    subject: `Reclamo recibido - Pedido ${data?.nombres || "N/A"}  `,
+    subject: `Contacto recibido - Pedido ${data?.nombres || "N/A"}  `,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
         <h2 style="color: #4CAF50; text-align: center;">Formulario de Reclamos</h2>
