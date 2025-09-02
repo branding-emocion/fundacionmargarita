@@ -13,6 +13,8 @@ import {
   ArrowRight,
   Smile,
 } from "lucide-react";
+import { useBanners } from "@/hooks/useBanners";
+import { BannerCarousel } from "@/components/Carrousel";
 
 export default function HomePage() {
   const fadeInUp = {
@@ -28,79 +30,12 @@ export default function HomePage() {
       },
     },
   };
+  const { banners, isLoading } = useBanners();
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary/10 to-accent/10 py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h1 className="text-4xl md:text-6xl font-black text-primary mb-6">
-                Donde nace tu <span className="text-accent">felicidad</span>
-              </h1>
-              <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-                Devolvemos sonrisas a niños con labio fisurado y paladar
-                hendido. Más de 11,000 cirugías realizadas con amor y
-                dedicación.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  size="lg"
-                  asChild
-                  className="bg-primary hover:bg-primary/90"
-                >
-                  <Link href="/Donar">
-                    <Heart className="w-5 h-5 mr-2" />
-                    Donar Ahora
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link href="/Nosotros">
-                    Conoce Nuestra Historia
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Link>
-                </Button>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
-                  src="/niño.jpg"
-                  alt="Niño sonriendo después de cirugía"
-                  className="w-full max-h-[700px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
-              </div>
-              {/* Floating emoji */}
-              <motion.div
-                className="absolute -top-4 -right-4 text-6xl"
-                animate={{
-                  rotate: [0, 10, -10, 0],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  repeatType: "reverse",
-                }}
-              >
-                😊
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      <BannerCarousel banners={banners} isLoading={isLoading} />
 
       {/* Quick Stats */}
       <section className="py-16 bg-card">
