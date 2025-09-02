@@ -58,7 +58,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link
-                  href="/nosotros"
+                  href="/Nosotros"
                   className="text-slate-600 hover:text-primary transition-colors"
                 >
                   Nosotros
@@ -66,7 +66,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/historias"
+                  href="/Historias"
                   className="text-slate-600 hover:text-primary transition-colors"
                 >
                   Historias de Vida
@@ -74,7 +74,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/alianzas"
+                  href="/Alianzas"
                   className="text-slate-600 hover:text-primary transition-colors"
                 >
                   Alianzas
@@ -82,7 +82,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/contacto"
+                  href="/Contacto"
                   className="text-slate-600 hover:text-primary transition-colors"
                 >
                   Contacto
@@ -90,7 +90,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/donar"
+                  href="/Donar"
                   className="text-slate-600 hover:text-primary transition-colors"
                 >
                   Donar
@@ -107,18 +107,18 @@ export default function Footer() {
             <div className="space-y-4 text-sm">
               <div className="flex items-center space-x-3 p-2 bg-white rounded-lg border border-slate-200">
                 <Phone className="w-4 h-4 text-primary" />
-                <span className="text-slate-600">+51 944 123 456</span>
+                <span className="text-slate-600">+51 960 544 941</span>
               </div>
               <div className="flex items-center space-x-3 p-2 bg-white rounded-lg border border-slate-200">
                 <Mail className="w-4 h-4 text-primary" />
                 <span className="text-slate-600">
-                  info@fundacionmargarita.org
+                  fundamarg.trujillo@gmail.com{" "}
                 </span>
               </div>
               <div className="flex items-start space-x-3 p-2 bg-white rounded-lg border border-slate-200">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span className="text-slate-600">
-                  Trujillo, La Libertad, Perú
+                  Calle San Andrés 356, Urb. San Andrés, Trujillo.{" "}
                 </span>
               </div>
             </div>

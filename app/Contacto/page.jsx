@@ -6,6 +6,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Phone,
   Mail,
@@ -15,6 +17,9 @@ import {
   Heart,
   Smile,
   Star,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 
 export default function ContactoPage() {
@@ -25,14 +30,72 @@ export default function ContactoPage() {
     asunto: "",
     mensaje: "",
   });
+  const [loading, setLoading] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [alert, setAlert] = useState({ show: false, type: "", message: "" });
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí iría la lógica para enviar el formulario
-    console.log("Formulario enviado:", formData);
-    alert(
-      "¡Mensaje enviado correctamente! 😊 Nos pondremos en contacto contigo pronto para ayudarte a devolver sonrisas."
-    );
+
+    if (!acceptTerms) {
+      setAlert({
+        show: true,
+        type: "error",
+        message: "Debes aceptar los términos y condiciones para continuar.",
+      });
+      return;
+    }
+
+    setLoading(true);
+    setAlert({ show: false, type: "", message: "" });
+
+    try {
+      const response = await fetch("/api/SendMailForm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error en la petición: ${response.status}`);
+      }
+
+      setFormData({
+        nombre: "",
+        email: "",
+        telefono: "",
+        asunto: "",
+        mensaje: "",
+      });
+      setAcceptTerms(false);
+      await response.json();
+
+      setAlert({
+        show: true,
+        type: "success",
+        message:
+          "¡Mensaje enviado correctamente! 😊 Nos pondremos en contacto contigo pronto para ayudarte a devolver sonrisas.",
+      });
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      setAlert({
+        show: true,
+        type: "error",
+        message:
+          "❌ Ocurrió un error al enviar el mensaje. Inténtalo nuevamente.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -47,6 +110,13 @@ export default function ContactoPage() {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 },
   };
+
+  const isFormValid =
+    formData.nombre &&
+    formData.email &&
+    formData.asunto &&
+    formData.mensaje &&
+    acceptTerms;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10">
@@ -266,6 +336,31 @@ export default function ContactoPage() {
               </div>
 
               <Card className="p-8 border-2 border-primary/20 bg-gradient-to-br from-background to-primary/5">
+                {alert.show && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-6"
+                  >
+                    <Alert
+                      className={`border-2 ${
+                        alert.type === "success"
+                          ? "border-green-200 bg-green-50 text-green-800"
+                          : "border-red-200 bg-red-50 text-red-800"
+                      }`}
+                    >
+                      {alert.type === "success" ? (
+                        <CheckCircle className="h-4 w-4" />
+                      ) : (
+                        <AlertCircle className="h-4 w-4" />
+                      )}
+                      <AlertDescription className="font-medium">
+                        {alert.message}
+                      </AlertDescription>
+                    </Alert>
+                  </motion.div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -281,7 +376,7 @@ export default function ContactoPage() {
                         type="text"
                         required
                         value={formData.nombre}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         placeholder="Tu nombre completo"
                         className="border-primary/30 focus:border-primary"
                       />
@@ -298,7 +393,7 @@ export default function ContactoPage() {
                         name="telefono"
                         type="tel"
                         value={formData.telefono}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         placeholder="Tu número de teléfono"
                         className="border-primary/30 focus:border-primary"
                       />
@@ -318,7 +413,7 @@ export default function ContactoPage() {
                       type="email"
                       required
                       value={formData.email}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       placeholder="tu@email.com"
                       className="border-primary/30 focus:border-primary"
                     />
@@ -337,7 +432,7 @@ export default function ContactoPage() {
                       type="text"
                       required
                       value={formData.asunto}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       placeholder="¿En qué podemos ayudarte?"
                       className="border-primary/30 focus:border-primary"
                     />
@@ -355,24 +450,61 @@ export default function ContactoPage() {
                       name="mensaje"
                       required
                       value={formData.mensaje}
-                      onChange={handleChange}
+                      onChange={handleInputChange}
                       placeholder="Escribe tu mensaje aquí..."
                       rows={6}
                       className="border-primary/30 focus:border-primary"
                     />
                   </div>
 
+                  <div className="flex items-start space-x-3 p-4 rounded-lg bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/30 shadow-sm">
+                    <Checkbox
+                      id="terms"
+                      checked={acceptTerms}
+                      onCheckedChange={setAcceptTerms}
+                      className="mt-1 w-5 h-5 border-2 border-primary data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                    />
+                    <div className="grid gap-1.5 leading-none">
+                      <label
+                        htmlFor="terms"
+                        className="text-sm font-semibold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer text-foreground"
+                      >
+                        Acepto los términos y condiciones
+                      </label>
+                      <p className="text-xs text-muted-foreground">
+                        Al enviar este formulario, acepto que mis datos sean
+                        utilizados para contactarme sobre los servicios de la
+                        Fundación Margarita y que he leído la política de
+                        privacidad.
+                      </p>
+                    </div>
+                  </div>
+
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ scale: isFormValid ? 1.02 : 1 }}
+                    whileTap={{ scale: isFormValid ? 0.98 : 1 }}
                   >
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white font-semibold py-3"
+                      disabled={loading || !isFormValid}
+                      className={`w-full font-semibold py-3 transition-all duration-300 ${
+                        isFormValid && !loading
+                          ? "bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white hover:cursor-pointer shadow-lg hover:shadow-xl"
+                          : "bg-muted text-muted-foreground cursor-not-allowed opacity-60"
+                      }`}
                     >
-                      <Send className="w-5 h-5 mr-2" />
-                      Enviar Mensaje con Amor 💝
+                      {loading ? (
+                        <>
+                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                          Enviando...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Enviar Mensaje con Amor 💝
+                        </>
+                      )}
                     </Button>
                   </motion.div>
                 </form>
@@ -486,7 +618,7 @@ export default function ContactoPage() {
                     >
                       <Phone className="w-4 h-4 text-accent" />
                       <span className="font-semibold text-accent">
-                        +51 944 123 456
+                        +51 960 544 941
                       </span>
                     </motion.div>
                     <motion.div
@@ -495,7 +627,7 @@ export default function ContactoPage() {
                     >
                       <Mail className="w-4 h-4 text-accent" />
                       <span className="font-semibold text-accent">
-                        emergencia@fundacionmargarita.org
+                        fundamarg.trujillo@gmail.com{" "}
                       </span>
                     </motion.div>
                   </div>
@@ -511,10 +643,8 @@ export default function ContactoPage() {
                 </div>
                 <Card className="bg-gradient-to-br from-secondary/10 to-primary/5 border-secondary/30 p-4">
                   <p className="text-sm text-muted-foreground">
-                    Nos encontramos en Trujillo, La Libertad, Perú. Nuestras
-                    instalaciones están ubicadas estratégicamente para brindar
-                    fácil acceso a las familias que necesitan nuestros
-                    servicios. 🏥💝
+                    Nos encontramos en Trujillo, Calle San Andrés 356, Urb. San
+                    Andrés, Trujillo.. 🏥💝
                   </p>
                 </Card>
               </div>
