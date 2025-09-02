@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }) => {
   const menu = [
     {
       name: "Usuarios",
-      link: "/Admin/Carrousel",
+      link: "/Admin/Usuarios",
       icon: <Users className="w-6 h-6 text-white" />,
       hidden: claims?.UsuarioBase,
     },
