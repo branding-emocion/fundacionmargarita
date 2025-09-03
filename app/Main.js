@@ -2,6 +2,7 @@
 
 import Footer from "@/components/footer";
 import Header from "@/components/header";
+import LiveStreamModal from "@/components/LiveStreamModal";
 import { usePathname } from "next/navigation";
 
 const Main = ({ children }) => {
@@ -13,6 +14,7 @@ const Main = ({ children }) => {
         <>{children}</>
       ) : (
         <main>
+          <LiveStreamModal />
           <Header />
           {children}
           <Footer />
