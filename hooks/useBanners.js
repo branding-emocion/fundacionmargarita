@@ -33,7 +33,7 @@ export function useBanners() {
       );
       const querySnapshot = await getDocs(bannersQuery);
       const bannersData = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
+        idDoc: doc.id,
         ...doc.data(),
       }));
       setBanners(bannersData);
@@ -96,10 +96,8 @@ export function useBanners() {
   };
 
   // Eliminar banner
-  const deleteBanner = async (bannerId) => {
+  const deleteBanner = async (banner) => {
     try {
-      const banner = banners.find((b) => b.id === bannerId);
-
       // Eliminar imagen del storage si existe
       if (banner?.imageUrl) {
         try {
@@ -111,7 +109,7 @@ export function useBanners() {
       }
 
       // Eliminar documento de Firestore
-      await deleteDoc(doc(db, "banners", bannerId));
+      await deleteDoc(doc(db, "banners", `${banner.idDoc}`));
       await loadBanners(); // Recargar la lista
     } catch (error) {
       console.error("Error eliminando banner:", error);

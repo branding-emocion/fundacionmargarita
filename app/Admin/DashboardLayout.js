@@ -6,7 +6,10 @@ import { auth, db } from "@/firebase/firebaseClient";
 import Link from "next/link";
 import {
   BookOpenText,
+  Image,
   MonitorXIcon,
+  Scroll,
+  Tally4,
   Users,
   Warehouse,
   YoutubeIcon,
@@ -35,18 +38,18 @@ const DashboardLayout = ({ children }) => {
     {
       name: "Carrousel",
       link: "/Admin/Carrousel",
-      icon: <Warehouse className="w-6 h-6 text-white" />,
+      icon: <Image className="w-6 h-6 text-white" />,
     },
 
     {
       name: "Historias de Vida",
       link: "/Admin/HistoriasVida",
-      icon: <Warehouse className="w-6 h-6 text-white" />,
+      icon: <Scroll className="w-6 h-6 text-white" />,
     },
     {
       name: "Alianzas",
       link: "/Admin/Alianzas",
-      icon: <Warehouse className="w-6 h-6 text-white" />,
+      icon: <Tally4 className="w-6 h-6 text-white" />,
     },
   ];
 
