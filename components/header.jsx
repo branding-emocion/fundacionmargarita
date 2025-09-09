@@ -34,12 +34,12 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8 ">
+          <nav className="hidden md:flex items-center space-x-8   ">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
+                className="text-foreground hover:text-primary transition-colors duration-200 font-medium uppercase"
               >
                 {item.label}
               </Link>
@@ -93,11 +93,11 @@ export default function Header() {
               ))}
               <Button
                 asChild
-                className="bg-accent hover:bg-accent/90 text-accent-foreground w-full"
+                className="bg-accent hover:bg-accent/90 text-accent-foreground w-full  "
               >
                 <Link href="/Donar">
                   <Heart className="w-4 h-4 mr-2" />
-                  Donar
+                  DONAR
                 </Link>
               </Button>
             </div>

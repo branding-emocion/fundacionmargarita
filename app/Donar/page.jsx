@@ -5,28 +5,25 @@ import { useState } from "react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Heart,
   CreditCard,
   Building,
   Smartphone,
   Check,
-  Gift,
+  QrCode,
 } from "lucide-react";
 
 export default function DonarPage() {
-  const [selectedAmount, setSelectedAmount] = useState(null);
-  const [customAmount, setCustomAmount] = useState("");
-  const [donationType, setDonationType] = useState("unica");
-
-  const predefinedAmounts = [50, 100, 200, 500, 1000, 2000];
-
-  const fadeInUp = {
-    initial: { opacity: 0, y: 60 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-  };
+  const [showQRModal, setShowQRModal] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -88,6 +85,7 @@ export default function DonarPage() {
                 titulo: "Billeteras Digitales",
                 descripcion: "Yape, Plin, BIM",
                 seguro: true,
+                hasQR: true,
               },
               {
                 icon: Heart,
@@ -114,10 +112,56 @@ export default function DonarPage() {
                       {metodo.descripcion}
                     </p>
                     {metodo.seguro && (
-                      <div className="flex items-center justify-center space-x-1 text-xs text-accent">
+                      <div className="flex items-center justify-center space-x-1 text-xs text-accent mb-3">
                         <Check className="w-3 h-3" />
                         <span>Seguro y Confiable</span>
                       </div>
+                    )}
+                    {metodo.hasQR && (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <Button
+                            size="sm"
+                            className="mt-2 w-full bg-gradient-to-r from-primary to-accent"
+                          >
+                            <QrCode className="w-4 h-4 mr-2" />
+                            Ver QR para Donar
+                          </Button>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader>
+                            <DialogTitle className="text-2xl font-bold text-primary text-center">
+                              Dona con Yape o Plin
+                            </DialogTitle>
+                            <DialogDescription className="text-center">
+                              Escanea este código QR con tu app de Yape o Plin
+                              para donar de forma rápida y segura
+                            </DialogDescription>
+                          </DialogHeader>
+
+                          <div className="text-center space-y-6">
+                            <div className="bg-gray-50 p-4 rounded-lg">
+                              <img
+                                src="/QR.png"
+                                alt="QR Code para donaciones"
+                                className="w-64 h-64 mx-auto"
+                              />
+                            </div>
+
+                            <div className="text-sm text-muted-foreground">
+                              <p className="font-semibold text-primary">
+                                Número: 987 654 321
+                              </p>
+                              <p>Fundación Margarita</p>
+                            </div>
+
+                            <Button className="w-full bg-gradient-to-r from-primary to-accent">
+                              <Heart className="w-4 h-4 mr-2" />
+                              ¡Gracias por tu donación!
+                            </Button>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
                     )}
                     {metodo.isPaypal && (
                       <Button
@@ -259,19 +303,6 @@ export default function DonarPage() {
               Tu generosidad hace posible que sigamos devolviendo sonrisas y
               creando historias de esperanza. Juntos podemos cambiar más vidas.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary">
-                <Heart className="w-5 h-5 mr-2" />
-                Donar Ahora
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-              >
-                Compartir con Amigos
-              </Button>
-            </div>
           </motion.div>
         </div>
       </section>

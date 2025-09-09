@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, ArrowRight, Heart, Users, Loader2 } from "lucide-react";
-import Link from "next/link";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Calendar, User, ArrowRight, Heart, Users } from "lucide-react";
+import { toast } from "sonner";
+import { NoticiasSkeleton } from "@/components/NoticiasBlog";
 import { getNoticias } from "@/lib/BlogNoticia";
 
 export default function NoticiasPage() {
@@ -27,151 +29,115 @@ export default function NoticiasPage() {
     loadNoticias();
   }, []);
 
-  const getExcerpt = (contenido, maxLength = 150) => {
-    if (contenido.length <= maxLength) return contenido;
-    return contenido.substring(0, maxLength) + "...";
-  };
-
-  const formatDate = (date) => {
-    if (!date) return "Fecha no disponible";
-    return date.toLocaleDateString("es-ES", {
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("es-ES", {
       year: "numeric",
       month: "long",
       day: "numeric",
     });
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-primary" />
-          <p className="text-muted-foreground">Cargando noticias...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="bg-gradient-to-br from-primary/10 via-secondary/5 to-background py-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-primary/20 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <Heart className="w-4 h-4" />
-            Mantente informado
-          </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Noticias de Nuestra Fundación
+      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950/20 dark:to-indigo-950/20 py-20">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 text-balance">
+            Noticias y Actualidad
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Descubre las últimas novedades, logros y actividades que estamos
-            realizando para transformar vidas en nuestra comunidad
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-pretty">
+            Mantente informado sobre nuestras últimas actividades, logros y el
+            impacto que estamos generando en las comunidades que servimos.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Noticias Grid */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
-        {noticias.length === 0 ? (
-          <div className="text-center py-16">
-            <Users className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-2xl font-semibold text-foreground mb-2">
-              Próximamente
-            </h3>
-            <p className="text-muted-foreground">
-              Estamos preparando noticias emocionantes para compartir contigo
-            </p>
-          </div>
-        ) : (
-          <>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
-                Últimas Noticias
-              </h2>
-              <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {noticias.map((noticia, index) => (
+      {/* News Content */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          {loading ? (
+            <NoticiasSkeleton />
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {noticias.map((noticia) => (
                 <Card
                   key={noticia.id}
-                  className="group border-border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                  className="overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 >
-                  <div className="relative overflow-hidden">
+                  <div className="aspect-video overflow-hidden">
                     <img
                       src={noticia.imagen || "/placeholder.svg"}
                       alt={noticia.titulo}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                        Noticia
-                      </span>
-                    </div>
                   </div>
-
-                  <CardContent className="p-6 bg-card">
-                    <div className="flex items-center gap-2 text-muted-foreground text-sm mb-3">
-                      <Calendar className="w-4 h-4" />
-                      {formatDate(noticia.createdAt)}
+                  <CardContent className="p-6">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Badge variant="secondary" className="text-xs">
+                        {noticia.categoria}
+                      </Badge>
                     </div>
 
-                    <h3 className="text-xl font-bold text-card-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 text-balance">
                       {noticia.titulo}
                     </h3>
 
-                    <p className="text-muted-foreground mb-4 line-clamp-3">
-                      {getExcerpt(noticia.contenido)}
+                    <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 text-pretty">
+                      {noticia.contenido}
                     </p>
 
-                    <Link href={`/Noticias/${noticia.id}`}>
-                      <Button
-                        variant="outline"
-                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all duration-300 bg-transparent"
-                      >
-                        Leer más
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
+                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-4">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        <span>{formatDate(noticia.fechaPublicacion)}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <User className="w-4 h-4" />
+                        <span>{noticia.autor}</span>
+                      </div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      className="w-full group bg-transparent"
+                    >
+                      Leer más
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
+          )}
+        </div>
+      </section>
 
-            {/* Call to Action */}
-            <div className="mt-16 text-center">
-              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 md:p-12">
-                <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  ¿Quieres ser parte del cambio?
-                </h3>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Únete a nuestra comunidad de voluntarios y donantes. Juntos
-                  podemos crear un impacto positivo y duradero en la vida de
-                  muchas personas.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Link href="/Donar">
-                    <Button className="bg-primary hover:bg-primary/90 text-primary-foreground hover:cursor-pointer">
-                      <Heart className="w-4 h-4 mr-2" />
-                      Hacer una donación
-                    </Button>
-                  </Link>
-                  <Link href="/Contacto">
-                    <Button
-                      variant="outline"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground bg-transparent hover:cursor-pointer"
-                    >
-                      <Users className="w-4 h-4 mr-2" />
-                      Ser voluntario
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-blue-600 to-indigo-700 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 text-balance">
+            Únete a Nuestra Misión
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto text-pretty">
+            Tu apoyo hace posible que sigamos transformando vidas y construyendo
+            un futuro mejor para las familias más vulnerables.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" variant="secondary" className="group">
+              <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Hacer una Donación
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="bg-transparent border-white text-white hover:bg-white hover:text-blue-600 group"
+            >
+              <Users className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Ser Voluntario
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
