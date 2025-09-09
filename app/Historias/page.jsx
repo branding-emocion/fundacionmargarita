@@ -11,7 +11,8 @@ export default function HistoriasPage() {
   const [historias, setHistorias] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log("historiasxd", historias);
+  console.log("historias", historias);
+
   const loadHistorias = async () => {
     try {
       setLoading(true);

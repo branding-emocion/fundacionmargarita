@@ -12,11 +12,62 @@ import {
   Handshake,
   ArrowRight,
   Smile,
+  Newspaper,
+  BookOpen,
+  Calendar,
+  Clock,
 } from "lucide-react";
 import { useBanners } from "@/hooks/useBanners";
 import { BannerCarousel } from "@/components/Carrousel";
+import { useEffect, useState } from "react";
+import { getBlogs, getNoticias } from "@/lib/BlogNoticia";
+import { useAllianceStore } from "@/lib/alliance-store";
+import { historiasService } from "@/lib/historias";
 
 export default function HomePage() {
+  const [noticias, setNoticias] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const [historias, setHistorias] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const {
+    alliances,
+    fetchAlliances,
+    loading: alliancesLoading,
+  } = useAllianceStore();
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const [noticiasData, blogsData, historiasData] = await Promise.all([
+          getNoticias(),
+          getBlogs(),
+          historiasService.getAll(),
+          fetchAlliances(),
+        ]);
+
+        setNoticias(noticiasData.slice(0, 3));
+        setBlogs(blogsData.slice(0, 3));
+        setHistorias(historiasData.slice(0, 3));
+      } catch (error) {
+        console.error("Error loading content:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+  }, [fetchAlliances]);
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "";
+    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    return date.toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
     animate: { opacity: 1, y: 0 },
@@ -146,42 +197,22 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
           >
-            {[
-              {
-                name: "María, 8 años",
-                story:
-                  "Después de su cirugía, María puede sonreír con confianza y ha mejorado su autoestima significativamente.",
-                image: "young girl smiling confidently after cleft lip surgery",
-              },
-              {
-                name: "Carlos, 12 años",
-                story:
-                  "La cirugía de paladar hendido le permitió a Carlos hablar claramente por primera vez en su vida.",
-                image: "boy speaking clearly after cleft palate surgery",
-              },
-              {
-                name: "Ana, 6 años",
-                story:
-                  "Con su nueva sonrisa, Ana ahora participa activamente en actividades escolares y sociales.",
-                image:
-                  "little girl participating in school activities, happy and confident",
-              },
-            ].map((story, index) => (
+            {historias?.map((story, index) => (
               <motion.div key={index} variants={fadeInUp}>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow">
                   <div className="aspect-square overflow-hidden">
                     <img
-                      src={`/Nosotros.jpg`}
-                      alt={story.name}
+                      src={`${story.imagen}`}
+                      alt={`${story.nombre}`}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-primary mb-2">
-                      {story.name}
+                      {story.nombre}
                     </h3>
-                    <p className="text-muted-foreground text-sm">
-                      {story.story}
+                    <p className="text-muted-foreground text-sm line-clamp-3">
+                      {story.resumen}
                     </p>
                   </CardContent>
                 </Card>
@@ -203,6 +234,117 @@ export default function HomePage() {
               </Link>
             </Button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Falta la seccion de alianzas  */}
+
+      {/* Alianzas Section */}
+      <section className="py-16 bg-gradient-to-br from-secondary/5 to-primary/5">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
+              <Handshake className="w-8 h-8 text-primary" />
+              Nuestras Alianzas
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Trabajamos junto a organizaciones comprometidas con el cambio
+              social y el desarrollo comunitario
+            </p>
+          </div>
+
+          {alliancesLoading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="animate-pulse">
+                  <div className="aspect-video bg-muted rounded-t-lg"></div>
+                  <CardContent className="p-6">
+                    <div className="h-4 bg-muted rounded mb-2"></div>
+                    <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
+                    <div className="h-3 bg-muted rounded w-1/2"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : alliances.length === 0 ? (
+            <div className="text-center py-12">
+              <Handshake className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+              <h3 className="text-lg font-semibold mb-2 text-muted-foreground">
+                Próximamente nuestras alianzas
+              </h3>
+              <p className="text-muted-foreground">
+                Estamos trabajando en establecer alianzas estratégicas para
+                ampliar nuestro impacto
+              </p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-6">
+              {alliances.slice(0, 3).map((alianza) => (
+                <Card
+                  key={alianza.id}
+                  className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden bg-card/50 backdrop-blur-sm border-primary/10"
+                >
+                  <div className="aspect-video overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10">
+                    {alianza.logo ? (
+                      <img
+                        src={alianza.logo || "/placeholder.svg"}
+                        alt={`Logo ${alianza.nombre}`}
+                        className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Handshake className="w-16 h-16 text-primary/50" />
+                      </div>
+                    )}
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {alianza.nombre}
+                    </h3>
+                    {alianza.tipo && (
+                      <div className="inline-block bg-primary/10 text-primary px-2 py-1 rounded-full text-xs font-medium mb-3">
+                        {alianza.tipo}
+                      </div>
+                    )}
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                      {alianza.descripcion}
+                    </p>
+                    {alianza.link && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 bg-transparent"
+                        asChild
+                      >
+                        <a
+                          href={alianza.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Visitar sitio web
+                          <ExternalLink className="w-3 h-3 ml-2" />
+                        </a>
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-8">
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="bg-card/50 backdrop-blur-sm"
+            >
+              <Link href="/alianzas">
+                Ver todas las alianzas
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -237,6 +379,171 @@ export default function HomePage() {
               </Button>
             </div>
           </motion.div>
+        </div>
+      </section>
+      <section className="py-16 bg-card">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
+              <Newspaper className="w-8 h-8 text-primary" />
+              Últimas Noticias
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Mantente informado sobre nuestras actividades más recientes y el
+              impacto en la comunidad
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="animate-pulse">
+                  <div className="aspect-video bg-muted rounded-t-lg"></div>
+                  <CardContent className="p-6">
+                    <div className="h-4 bg-muted rounded mb-2"></div>
+                    <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
+                    <div className="h-3 bg-muted rounded w-1/2"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-6">
+              {noticias.map((noticia) => (
+                <Card
+                  key={noticia.id}
+                  className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={noticia.imagen || ""}
+                      alt={noticia.titulo}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {noticia.titulo}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                      {noticia.contenido
+                        ?.replace(/<[^>]*>/g, "")
+                        .substring(0, 120)}
+                      ...
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Calendar className="w-3 h-3" />
+                        {formatDate(noticia.fechaCreacion)}
+                      </div>
+                      <Link href={`/Noticias/${noticia.id}`}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="text-primary hover:text-primary-foreground hover:bg-primary"
+                        >
+                          Leer más
+                          <ArrowRight className="w-3 h-3 ml-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/noticias">
+                Ver todas las noticias
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
+              <BookOpen className="w-8 h-8 text-primary" />
+              Últimos Artículos del Blog
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Reflexiones, historias inspiradoras y perspectivas sobre el
+              desarrollo social y comunitario
+            </p>
+          </div>
+
+          {loading ? (
+            <div className="grid md:grid-cols-3 gap-6">
+              {[1, 2, 3].map((i) => (
+                <Card key={i} className="animate-pulse">
+                  <div className="aspect-video bg-muted rounded-t-lg"></div>
+                  <CardContent className="p-6">
+                    <div className="h-4 bg-muted rounded mb-2"></div>
+                    <div className="h-4 bg-muted rounded w-3/4 mb-4"></div>
+                    <div className="h-3 bg-muted rounded w-1/2"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-3 gap-6">
+              {blogs.map((blog) => (
+                <Card
+                  key={blog.id}
+                  className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+                >
+                  <div className="aspect-video overflow-hidden">
+                    <img
+                      src={blog.imagen || ""}
+                      alt={blog.titulo}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                      {blog.titulo}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
+                      {blog.contenido
+                        ?.replace(/<[^>]*>/g, "")
+                        .substring(0, 120)}
+                      ...
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Clock className="w-3 h-3" />
+                        {formatDate(blog.fechaCreacion)}
+                      </div>
+                      <Link href={`/Blog/${blog.id}`}>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="text-primary hover:text-primary-foreground hover:bg-primary"
+                        >
+                          Leer más
+                          <ArrowRight className="w-3 h-3 ml-1" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          )}
+
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/blog">
+                Ver todos los artículos
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

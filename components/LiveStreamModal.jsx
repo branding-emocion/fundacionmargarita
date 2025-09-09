@@ -21,8 +21,6 @@ export default function LiveStreamModal() {
     const checkForActiveStream = () => {
       const streamToShow = getStreamToShow();
 
-      console.log("streamToShow", streamToShow);
-
       if (streamToShow && !isModalOpen) {
         setCurrentStream(streamToShow);
         openModal();

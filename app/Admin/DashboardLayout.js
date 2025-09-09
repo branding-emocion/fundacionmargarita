@@ -8,6 +8,8 @@ import {
   BookOpenText,
   Image,
   MonitorXIcon,
+  Newspaper,
+  Notebook,
   Scroll,
   Tally4,
   Users,
@@ -45,6 +47,16 @@ const DashboardLayout = ({ children }) => {
       name: "Historias de Vida",
       link: "/Admin/HistoriasVida",
       icon: <Scroll className="w-6 h-6 text-white" />,
+    },
+    {
+      name: "Noticias",
+      link: "/Admin/Noticias",
+      icon: <Newspaper className="w-6 h-6 text-white" />,
+    },
+    {
+      name: "Blog",
+      link: "/Admin/Blog",
+      icon: <Notebook className="w-6 h-6 text-white" />,
     },
     {
       name: "Alianzas",

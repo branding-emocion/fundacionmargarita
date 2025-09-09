@@ -15,6 +15,8 @@ export default function Header() {
     { href: "/Nosotros", label: "Nosotros" },
     { href: "/Historias", label: "Historias de Vida" },
     { href: "/Alianzas", label: "Alianzas" },
+    { href: "/Blog", label: "Blog" },
+    { href: "/Noticias", label: "Noticias" },
     { href: "/Contacto", label: "Contacto" },
   ];
 
