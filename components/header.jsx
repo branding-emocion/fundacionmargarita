@@ -22,7 +22,7 @@ export default function Header() {
 
   const buttons = [
     {
-      href: "https://wa.me/51944123456",
+      href: "https://wa.me/51960544941",
       icon: MessageCircle,
       label: "WhatsApp",
       className: "bg-green-500 hover:bg-green-600 text-white",
