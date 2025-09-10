@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, ArrowLeft } from "lucide-react";
+import { ExternalLink, ArrowLeft, Heart, Sparkles } from "lucide-react";
 import { useAllianceStore } from "@/lib/alliance-store";
 
 export default function AlianzasPage() {
@@ -41,34 +41,32 @@ export default function AlianzasPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <section className="py-20 bg-gradient-to-br from-primary/20 via-accent/10 to-secondary/20 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute top-8 left-8 text-6xl">🤝</div>
-          <div className="absolute top-12 right-12 text-4xl">✨</div>
-          <div className="absolute bottom-8 left-1/4 text-5xl">💫</div>
-          <div className="absolute bottom-12 right-1/3 text-4xl">🌟</div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-black text-primary mb-6">
-              Nuestras <span className="text-accent">Alianzas</span> 🤝
+      <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-white">
+            <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+              <Heart className="w-5 h-5 text-white" />
+              <span className="text-sm font-medium text-white">Desde 2015</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 uppercase">
+              Nuestras <span className="text-pink-200">Alianzas</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              ✨ Trabajamos en conjunto con organizaciones, instituciones y
-              profesionales comprometidos con nuestra misión de devolver
-              sonrisas. 💝
-            </p>
-          </motion.div>
+
+            <div className="flex items-center justify-center gap-2 text-pink-200">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                ✨ Trabajamos en conjunto con organizaciones, instituciones y
+                profesionales comprometidos con nuestra misión de devolver
+                sonrisas. 💝
+              </span>
+              <Sparkles className="w-5 h-5" />
+            </div>
+          </div>
         </div>
-      </section>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </header>
+
       <div className="container mx-auto px-4 py-8">
         {/* Alliances Grid */}
         {alliances.length === 0 ? (

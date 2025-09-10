@@ -37,25 +37,6 @@ export default function HistoriasPage() {
 
   return (
     <div className="min-h-screen">
-      {/* <section className="py-20 bg-gradient-to-br from-primary/10 to-accent/10">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-black text-primary mb-6">
-              Historias de <span className="text-accent">Vida</span>
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Cada sonrisa cuenta una historia de esperanza, transformación y
-              nuevas oportunidades. Conoce las historias reales de los niños que
-              hemos ayudado.
-            </p>
-          </motion.div>
-        </div>
-      </section> */}
       <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

@@ -20,6 +20,7 @@ import {
   CheckCircle,
   AlertCircle,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 
 export default function ContactoPage() {
@@ -120,99 +121,31 @@ export default function ContactoPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-accent/10">
-      <section className="py-20 bg-gradient-to-br from-primary/20 via-accent/15 to-secondary/20 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              rotate: 360,
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-            className="absolute top-10 left-10 text-accent/30"
-          >
-            <Heart className="w-16 h-16" />
-          </motion.div>
-          <motion.div
-            animate={{
-              rotate: -360,
-              y: [0, -20, 0],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-            className="absolute top-20 right-20 text-secondary/40"
-          >
-            <Smile className="w-12 h-12" />
-          </motion.div>
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-            className="absolute bottom-10 left-1/4 text-accent/25"
-          >
-            <Star className="w-10 h-10" />
-          </motion.div>
-          <motion.div
-            animate={{
-              x: [0, 30, 0],
-              rotate: [0, 45, 0],
-            }}
-            transition={{
-              duration: 18,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "easeInOut",
-            }}
-            className="absolute bottom-20 right-10 text-primary/30"
-          >
-            <Heart className="w-14 h-14" />
-          </motion.div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.05, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-              }}
-              className="inline-block mb-6"
-            >
-              <Smile className="w-16 h-16 text-accent mx-auto mb-4" />
-            </motion.div>
-            <h1 className="text-4xl md:text-6xl font-black bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent mb-6">
-              ¡Contáctanos!
+      <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-white">
+            <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+              <Heart className="w-5 h-5 text-white" />
+              <span className="text-sm font-medium text-white">Desde 2015</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 uppercase">
+              <span className="text-pink-200"> ¡Contáctanos!</span>
             </h1>
-            <p className="text-lg text-foreground/80 max-w-3xl mx-auto leading-relaxed">
-              Estamos aquí para ayudarte a devolver sonrisas. Si necesitas
-              información sobre nuestros servicios, quieres ser voluntario o
-              tienes alguna consulta, ¡no dudes en contactarnos! 💝
-            </p>
-          </motion.div>
-        </div>
-      </section>
 
+            <div className="flex items-center justify-center gap-2 text-pink-200">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                ✨ Estamos aquí para ayudarte a devolver sonrisas. Si necesitas
+                información sobre nuestros servicios, quieres ser voluntario o
+                tienes alguna consulta, ¡no dudes en contactarnos! 💝
+              </span>
+              <Sparkles className="w-5 h-5" />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </header>
       <section className="py-16">
         <div className="container mx-auto px-4">
           <motion.div

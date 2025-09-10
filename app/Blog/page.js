@@ -12,6 +12,7 @@ import {
   Loader2,
   Heart,
   Users,
+  Sparkles,
 } from "lucide-react";
 import Link from "next/link";
 import { getBlogs } from "@/lib/BlogNoticia";
@@ -65,22 +66,30 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-br from-secondary/15 via-primary/10 to-background py-16 px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-[#0e97d9] text-secondary-foreground px-4 py-2 rounded-full text-sm font-medium mb-6">
-            <BookOpen className="w-4 h-4" />
-            Reflexiones y experiencias
+      <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-white">
+            <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+              <Heart className="w-5 h-5 text-white" />
+              <span className="text-sm font-medium text-white">Desde 2015</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 uppercase">
+              Blog de Nuestra y<span className="text-pink-200">Fundación</span>
+            </h1>
+
+            <div className="flex items-center justify-center gap-2 text-pink-200">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                ✨ Compartimos reflexiones, experiencias y aprendizajes sobre
+                nuestro trabajo en el desarrollo social y comunitario 💝
+              </span>
+              <Sparkles className="w-5 h-5" />
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-            Blog de Nuestra Fundación
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Compartimos reflexiones, experiencias y aprendizajes sobre nuestro
-            trabajo en el desarrollo social y comunitario
-          </p>
         </div>
-      </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </header>
 
       {/* Blog Articles */}
       <div className="max-w-6xl mx-auto px-6 py-16">

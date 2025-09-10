@@ -20,6 +20,7 @@ import {
   Smartphone,
   Check,
   QrCode,
+  Sparkles,
 } from "lucide-react";
 
 export default function DonarPage() {
@@ -28,25 +29,32 @@ export default function DonarPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/10 to-accent/10">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center"
-          >
-            <h1 className="text-4xl md:text-6xl font-black text-primary mb-6">
-              Dona con el <span className="text-accent">Corazón</span>
+
+      <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-white">
+            <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+              <Heart className="w-5 h-5 text-white" />
+              <span className="text-sm font-medium text-white">Desde 2015</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 uppercase">
+              Dona con el <span className="text-pink-200"> Corazón</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Tu donación puede cambiar la vida de un niño para siempre.
-              Ayúdanos a seguir devolviendo sonrisas y creando historias de
-              esperanza.
-            </p>
-          </motion.div>
+
+            <div className="flex items-center justify-center gap-2 text-pink-200">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                ✨ Tu donación puede cambiar la vida de un niño para siempre.
+                Ayúdanos a seguir devolviendo sonrisas y creando historias de
+                esperanza. 💝
+              </span>
+              <Sparkles className="w-5 h-5" />
+            </div>
+          </div>
         </div>
-      </section>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </header>
 
       {/* Métodos de Pago */}
       <section className="py-16 bg-card">

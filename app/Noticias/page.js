@@ -4,7 +4,14 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, User, ArrowRight, Heart, Users } from "lucide-react";
+import {
+  Calendar,
+  User,
+  ArrowRight,
+  Heart,
+  Users,
+  Sparkles,
+} from "lucide-react";
 import { toast } from "sonner";
 import { NoticiasSkeleton } from "@/components/NoticiasBlog";
 import { getNoticias } from "@/lib/BlogNoticia";
@@ -39,19 +46,31 @@ export default function NoticiasPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-950/20 dark:to-indigo-950/20 py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 text-balance">
-            Noticias y Actualidad
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto text-pretty">
-            Mantente informado sobre nuestras últimas actividades, logros y el
-            impacto que estamos generando en las comunidades que servimos.
-          </p>
-        </div>
-      </section>
+      <header className="relative bg-gradient-to-r from-[#25adee] via-blue-700 to-[#f10783] overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center text-white">
+            <div className="inline-flex items-center gap-2 bg-white/30 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-white/20">
+              <Heart className="w-5 h-5 text-white" />
+              <span className="text-sm font-medium text-white">Desde 2015</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 uppercase">
+              Noticias y<span className="text-pink-200">Actualidad</span>
+            </h1>
 
+            <div className="flex items-center justify-center gap-2 text-pink-200">
+              <Sparkles className="w-5 h-5" />
+              <span className="text-lg font-medium">
+                ✨ Mantente informado sobre nuestras últimas actividades, logros
+                y el impacto que estamos generando en las comunidades que
+                servimos. 💝
+              </span>
+              <Sparkles className="w-5 h-5" />
+            </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      </header>
       {/* News Content */}
       <section className="py-16">
         <div className="container mx-auto px-4">
