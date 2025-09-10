@@ -42,6 +42,11 @@ const DashboardLayout = ({ children }) => {
       link: "/Admin/Carrousel",
       icon: <Image className="w-6 h-6 text-white" />,
     },
+    {
+      name: "Anuncios",
+      link: "/Admin/Anuncios",
+      icon: <Image className="w-6 h-6 text-white" />,
+    },
 
     {
       name: "Historias de Vida",
