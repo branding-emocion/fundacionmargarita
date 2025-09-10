@@ -93,7 +93,7 @@ export default function Header() {
               ))}
               <Button
                 asChild
-                className="bg-accent hover:bg-accent/90 text-accent-foreground w-full  "
+                className="bg-accent hover:bg-accent/90   w-full  "
               >
                 <Link href="/Donar">
                   <Heart className="w-4 h-4 mr-2" />
