@@ -161,7 +161,7 @@ export default function HomePage() {
                 el ejemplo de solidaridad y servicio a los más necesitados.
               </p>
               <Button asChild>
-                <Link href="/nosotros">
+                <Link href="/Nosotros">
                   Leer Historia Completa
                   <ArrowRight className="w-4 h-4 ml-2" />
                 </Link>
@@ -339,7 +339,7 @@ export default function HomePage() {
               size="lg"
               className="bg-card/50 backdrop-blur-sm"
             >
-              <Link href="/alianzas">
+              <Link href="/Alianzas">
                 Ver todas las alianzas
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Link>
