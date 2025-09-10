@@ -54,7 +54,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <Image src={"/logo.jpg"} alt="Logo" width={160} height={52} />
+            <Image src={"/logo.png"} alt="Logo" width={160} height={52} />
           </Link>
 
           {/* Desktop Navigation */}

@@ -50,7 +50,7 @@ export const metadata = {
     title: "Fundación Margarita - Devolviendo Sonrisas a los Niños",
     description:
       "Transformamos vidas a través de cirugías reconstructivas para niños. Más de 11,000 sonrisas devueltas.",
-    images: ["/logo.jpg"],
+    images: ["/logo.png"],
     creator: "@FundacionMargarita",
   },
 
