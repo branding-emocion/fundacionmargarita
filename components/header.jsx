@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Heart } from "lucide-react";
+import { Menu, X, Heart, MessageCircle, Mail, HeartIcon } from "lucide-react";
 import Image from "next/image";
 
 export default function Header() {
@@ -20,9 +20,33 @@ export default function Header() {
     { href: "/Contacto", label: "Contacto" },
   ];
 
+  const buttons = [
+    {
+      href: "https://wa.me/51944123456",
+      icon: MessageCircle,
+      label: "WhatsApp",
+      className: "bg-green-500 hover:bg-green-600 text-white",
+      external: true,
+    },
+    {
+      href: "/Donar",
+      icon: HeartIcon,
+      label: "Donaciones",
+      className: "bg-red-500 hover:bg-red-600 text-white",
+      external: false,
+    },
+    {
+      href: "/Contacto",
+      icon: Mail,
+      label: "Contacto",
+      className: "bg-blue-500 hover:bg-blue-600 text-white",
+      external: false,
+    },
+  ];
+
   return (
     <motion.header
-      className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border "
+      className="sticky top-0 bottom-1 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border "
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -103,6 +127,41 @@ export default function Header() {
             </div>
           </motion.nav>
         )}
+      </div>
+
+      <div className="fixed right-4 top-[70vh] z-40 flex flex-col gap-3">
+        {buttons.map((button, index) => {
+          const Icon = button.icon;
+          const ButtonComponent = (
+            <motion.button
+              key={index}
+              className={`w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:cursor-pointer hover:scale-110 ${button.className}`}
+              initial={{ x: 100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.3 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              title={button.label}
+            >
+              <Icon className="w-5 h-5" />
+            </motion.button>
+          );
+
+          return button.external ? (
+            <a
+              key={button.href}
+              href={button.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {ButtonComponent}
+            </a>
+          ) : (
+            <Link key={button.href} href={button.href}>
+              {ButtonComponent}
+            </Link>
+          );
+        })}
       </div>
     </motion.header>
   );
