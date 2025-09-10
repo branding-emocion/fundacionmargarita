@@ -53,8 +53,8 @@ export default function Header() {
               className="bg-accent hover:bg-accent/90 text-accent-foreground"
             >
               <Link href="/Donar">
-                <Heart className="w-4 h-4 mr-2" />
-                Donar
+                <Heart className="w-4 h-4 mr-1" />
+                DONAR
               </Link>
             </Button>
           </div>

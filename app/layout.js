@@ -43,21 +43,14 @@ export const metadata = {
     title: "Fundación Margarita - Devolviendo Sonrisas a los Niños",
     description:
       "Transformamos vidas a través de cirugías reconstructivas para niños. Más de 11,000 sonrisas devueltas. Cada cirugía representa una nueva oportunidad y esperanza.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Fundación Margarita - Devolviendo Sonrisas",
-      },
-    ],
+    images: "/logo.png",
   },
   twitter: {
     card: "summary_large_image",
     title: "Fundación Margarita - Devolviendo Sonrisas a los Niños",
     description:
       "Transformamos vidas a través de cirugías reconstructivas para niños. Más de 11,000 sonrisas devueltas.",
-    images: ["/og-image.jpg"],
+    images: ["/logo.jpg"],
     creator: "@FundacionMargarita",
   },
 
@@ -66,7 +59,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
