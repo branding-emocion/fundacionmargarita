@@ -125,7 +125,7 @@ export default function HomePage() {
       </section>
 
       {/* About Preview */}
-      <section className="py-16">
+      <section className="py-10">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -135,7 +135,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
             >
               <img
-                src="/Nosotros.jpg"
+                src="/hero1.jpg"
                 alt="Dr. Walter Zegarra Carranza"
                 className="rounded-2xl shadow-lg w-full"
               />
