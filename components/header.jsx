@@ -11,7 +11,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "/", label: "Inicio" },
     { href: "/Nosotros", label: "Nosotros" },
     { href: "/Historias", label: "Historias de Vida" },
     { href: "/Alianzas", label: "Alianzas" },
@@ -58,7 +57,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8   ">
+          <nav className="hidden lg:flex items-center space-x-4 lg:space-x-8   ">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -85,7 +84,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="lg:hidden"
             onClick={(e) => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -99,7 +98,7 @@ export default function Header() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <motion.nav
-            className="md:hidden mt-4 pb-4"
+            className="lg:hidden mt-4 pb-4"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
